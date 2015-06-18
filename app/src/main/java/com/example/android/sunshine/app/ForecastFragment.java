@@ -1,4 +1,4 @@
-package com.github.mjhassanpur.sunshine.app;
+package com.example.android.sunshine.app;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,7 +49,7 @@ public class ForecastFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.forecastfragment, menu);
+        inflater.inflate(com.example.android.sunshine.app.R.menu.forecastfragment, menu);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ForecastFragment extends Fragment {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_refresh) {
+        if (id == com.example.android.sunshine.app.R.id.action_refresh) {
             updateWeather();
             return true;
         }
@@ -73,14 +73,14 @@ public class ForecastFragment extends Fragment {
         // to populate the ListView it's attached to.
         mForecastAdapter =
                 new ArrayAdapter<String>(getActivity(),
-                        R.layout.list_item_forecast,
-                        R.id.list_item_forecast_textview,
+                        com.example.android.sunshine.app.R.layout.list_item_forecast,
+                        com.example.android.sunshine.app.R.id.list_item_forecast_textview,
                         new ArrayList<String>());
 
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(com.example.android.sunshine.app.R.layout.fragment_main, container, false);
 
         // Attach the forecast adapter to the ListView
-        ListView listView = (ListView) rootView.findViewById(R.id.listview_forecast);
+        ListView listView = (ListView) rootView.findViewById(com.example.android.sunshine.app.R.id.listview_forecast);
         listView.setAdapter(mForecastAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -98,8 +98,8 @@ public class ForecastFragment extends Fragment {
 
     private void updateWeather() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
+        String location = prefs.getString(getString(com.example.android.sunshine.app.R.string.pref_location_key),
+                getString(com.example.android.sunshine.app.R.string.pref_location_default));
         new FetchWeatherTask().execute(location);
     }
 
@@ -128,10 +128,10 @@ public class ForecastFragment extends Fragment {
          */
         private String formatHighLows(double high, double low, String unitType) {
 
-            if (unitType.equals(getString(R.string.pref_units_imperial))) {
+            if (unitType.equals(getString(com.example.android.sunshine.app.R.string.pref_units_imperial))) {
                 high = (high * 1.8) + 32;
                 low = (low * 1.8) + 32;
-            } else if (!unitType.equals(getString(R.string.pref_units_metric))) {
+            } else if (!unitType.equals(getString(com.example.android.sunshine.app.R.string.pref_units_metric))) {
                 Log.d(LOG_TAG, "Unit type not found: " + unitType);
             }
 
@@ -191,8 +191,8 @@ public class ForecastFragment extends Fragment {
             SharedPreferences sharedPrefs =
                     PreferenceManager.getDefaultSharedPreferences(getActivity());
             String unitType = sharedPrefs.getString(
-                    getString(R.string.pref_units_key),
-                    getString(R.string.pref_units_metric));
+                    getString(com.example.android.sunshine.app.R.string.pref_units_key),
+                    getString(com.example.android.sunshine.app.R.string.pref_units_metric));
 
             for (int i = 0; i < weatherArray.length(); i++) {
                 // For now, using the format "Day, description, hi/low"
